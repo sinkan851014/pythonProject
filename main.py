@@ -7,9 +7,9 @@ url="http://61.60.10.87/Device/latest/VD/VDLive.xml"
 with req.urlopen(url) as response:
     data = response.read().decode("utf-8")
 
-import bs4
-root = bs4.BeautifulSoup(data, "xml")
-titles=root.find_all("LinkFlow")
+import bs4 #爬蟲套件
+root = bs4.BeautifulSoup(data, "xml") #解析xml資料
+titles=root.find_all("LinkFlow") #抓關鍵字
 time=root.find("UpdateTime")
 vehiclevolun=root.find_all("Vehicle")
 A=[]
@@ -17,7 +17,7 @@ B=[]
 C=[]
 for LinkFlow in titles:
     if LinkFlow.text != None:
-        A.append(LinkFlow.LinkID.text)
+        A.append(LinkFlow.LinkID.text) #
         B.append(LinkFlow.Lanes.Lane.Speed.text)
         C.append(LinkFlow.Lanes.Lane.Vehicles.contents[3].Volume.text)
 A.append(time.text)
